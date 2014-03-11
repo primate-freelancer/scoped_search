@@ -542,6 +542,10 @@ module ScopedSearch
         sql
       end
     end
+    
+    class MainAdapter < ScopedSearch::QueryBuilder::PostgreSQLAdapter
+      
+    end
 
     # The Oracle adapter also requires some tweaks to make the case insensitive LIKE work.
     class OracleEnhancedAdapter < ScopedSearch::QueryBuilder
