@@ -234,11 +234,9 @@ module ScopedSearch
 
     # Registers the search_for named scope within the class that is used for searching.
     def register_named_scope! # :nodoc
-      
       if @klass.ancestors.include?(ActiveRecord::Base)
         case ActiveRecord::VERSION::MAJOR
         when 2
-          
           @klass.named_scope(:search_for, lambda { |*args| ScopedSearch::QueryBuilder.build_query(self, args[0], args[1]) })
         when 3
           
@@ -254,9 +252,6 @@ module ScopedSearch
         when 4
           
           @klass.scope(:search_for, lambda { |*args|
-            
-            binding.pry
-            
             find_options = ScopedSearch::QueryBuilder.build_query(self, args[0], args[1])
             search_scope = @klass.all
             search_scope = search_scope.where(find_options[:conditions]) if find_options[:conditions]
